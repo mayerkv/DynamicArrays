@@ -1,7 +1,4 @@
-import model.FactorArray;
-import model.IArray;
-import model.SingleArray;
-import model.VectorArray;
+import model.*;
 
 import java.util.Date;
 
@@ -15,6 +12,7 @@ public class Program {
                 new SingleArray(),
                 new VectorArray(),
                 new FactorArray(),
+                new ArrayList()
             };
 
             for (IArray array : arrays) {
