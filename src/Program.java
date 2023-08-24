@@ -1,27 +1,63 @@
-import model.*;
+import model.FactorArray;
+import model.IArray;
+import model.SingleArray;
+import model.VectorArray;
 
 import java.util.Date;
 
 public class Program {
 
     public static void main(String[] args) {
-        IArray singleArray = new SingleArray();
-        IArray vectorArray = new FactorArray();
-        IArray factorArray = new FactorArray();
-        IArray matrixArray = new MatrixArray();
-        testAddArray(singleArray, 10_000);
-        testAddArray(vectorArray, 100_000);
-        testAddArray(factorArray, 100_000);
-        testAddArray(matrixArray, 100_000);
+        for (int n = 100; n <= 100_000; n *= 10) {
+            System.out.printf("Tests for %d elements\n", n);
+
+            IArray[] arrays = {
+                new SingleArray(),
+                new VectorArray(),
+                new FactorArray(),
+            };
+
+            for (IArray array : arrays) {
+                testAddInTail(array, n);
+                testAddInPosition(array, n);
+                testRemoveFromPosition(array, n);
+            }
+
+            System.out.println("--------------------");
+        }
+
     }
 
-    private static void testAddArray(IArray data, int total) {
+    private static void testAddInTail(IArray data, int total) {
         long start = System.currentTimeMillis();
 
-        for (int j = 0; j < total; j ++)
+        for (int j = 0; j < total; j++)
             data.add(new Date());
 
-        System.out.println(data + " testAddArray: " +
-                (System.currentTimeMillis() - start));
+        System.out.println(data + " testAddInTail: " +
+            (System.currentTimeMillis() - start));
+    }
+
+    private static void testAddInPosition(IArray data, int total) {
+        long start = System.currentTimeMillis();
+
+        for (int j = 0; j < total; j++) {
+            int a = total - j;
+            data.add(a, j);
+        }
+
+        System.out.println(data + " testAddInPosition: " +
+            (System.currentTimeMillis() - start));
+    }
+
+    private static void testRemoveFromPosition(IArray data, int total) {
+        long start = System.currentTimeMillis();
+
+        for (int j = 0; j < total; j++) {
+            data.remove(total - j);
+        }
+
+        System.out.println(data + " testRemoveFromPosition: " +
+            (System.currentTimeMillis() - start));
     }
 }

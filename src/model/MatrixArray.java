@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Stack;
+
 public class MatrixArray<T> implements IArray<T> {
 
     private int size;
@@ -24,13 +26,24 @@ public class MatrixArray<T> implements IArray<T> {
     @Override
     public void add(T item) {
         if (size == array.size() * vector)
-            array.add(new VectorArray<T>(vector));
+            array.add(new VectorArray<>(vector));
         array.get(size / vector).add(item);
-        size ++;
+        size++;
     }
 
     @Override
     public T get(int index) {
         return array.get(index / vector).get(index % vector);
+    }
+
+    @Override
+    public void add(T item, int index) {
+        // todo implements
+    }
+
+    @Override
+    public T remove(int index) {
+        // todo implements
+        return null;
     }
 }
