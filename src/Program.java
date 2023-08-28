@@ -12,7 +12,8 @@ public class Program {
                 new SingleArray(),
                 new VectorArray(),
                 new FactorArray(),
-                new ArrayList()
+                new ArrayList(),
+                new LinkedList(),
             };
 
             for (IArray array : arrays) {
@@ -21,9 +22,8 @@ public class Program {
                 testRemoveFromPosition(array, n);
             }
 
-            System.out.println("--------------------");
+            System.out.println("--------------------\n");
         }
-
     }
 
     private static void testAddInTail(IArray data, int total) {
@@ -51,7 +51,7 @@ public class Program {
     private static void testRemoveFromPosition(IArray data, int total) {
         long start = System.currentTimeMillis();
 
-        for (int j = 0; j < total; j++) {
+        for (int j = 1; j <= total; j++) {
             data.remove(total - j);
         }
 
